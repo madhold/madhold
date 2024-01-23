@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Music Request App</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Music Request App</h1>
+
+        <!-- Class Selection -->
+        <label for="classSelect">Select Your Class:</label>
+        <select id="classSelect" name="classSelect">
+            <option value="classA">Class A</option>
+            <option value="classB">Class B</option>
+            <option value="classC">Class C</option>
+            <option value="classD">Class D</option>
+        </select>
+
+        <!-- Genre Selection -->
+        <label for="genreSelect">Select Your Genre:</label>
+        <select id="genreSelect" name="genreSelect">
+            <option value="dance">Dance</option>
+            <option value="feelGood">Feel Good</option>
+            <!-- Add more genres as needed -->
+        </select>
+
+        <!-- Name Entry -->
+        <label for="nameInput">Your Name:</label>
+        <input type="text" id="nameInput" name="nameInput" required>
+
+        <!-- Song Form -->
+        <form id="songForm">
+            <label for="songLink">Song Link:</label>
+            <input type="text" id="songLink" name="songLink" required>
+            <button type="button" onclick="addSong()">Add Song</button>
+        </form>
+
+        <!-- Song List -->
+        <ul id="songList"></ul>
+
+        <!-- Movie Name Entry -->
+        <label for="movieNameInput">Movie Name:</label>
+        <input type="text" id="movieNameInput" name="movieNameInput" required>
+
+        <!-- Submit Button -->
+        <button type="button" onclick="submitRequest()">Submit Request</button>
+
+        <!-- Collected Data Display -->
+        <div id="collected-data"></div>
+
+        <!-- Page Link -->
+        <p id="page-link"></p>
+
+        <!-- Button to Access Collected Data -->
+        <button type="button" id="access-data-button">Access Collected Data</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

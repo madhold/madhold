@@ -1,0 +1,106 @@
+// Define a global variable to store the collected data
+var requestData = [];
+
+function addSong() {
+    var songLink = document.getElementById('songLink').value;
+
+    if (songLink.trim() === '') {
+        alert('Please enter a valid song link.');
+        return;
+    }
+
+    var songList = document.getElementById('songList');
+    var listItem = document.createElement('li');
+    listItem.textContent = songLink;
+    songList.appendChild(listItem);
+
+    // Clear the input field after adding the song
+    document.getElementById('songLink').value = '';
+}
+
+function submitRequest() {
+    var selectedClass = document.getElementById('classSelect').value;
+    var selectedGenre = document.getElementById('genreSelect').value;
+    var userName = document.getElementById('nameInput').value;
+    var movieName = document.getElementById('movieNameInput').value;
+
+    if (userName.trim() === '' || movieName.trim() === '') {
+        alert('Please enter your name and a movie name.');
+        return;
+    }
+
+    var songLinks = [];
+    var songs = document.getElementById('songList').getElementsByTagName('li');
+    for (var i = 0; i < songs.length; i++) {
+        songLinks.push(songs[i].textContent);
+    }
+
+    // Create an object to represent the collected data
+    var requestDataItem = {
+        class: selectedClass,
+        genre: selectedGenre,
+        name: userName,
+        movie: movieName,
+        songs: songLinks
+    };
+
+    // Add the data to the global variable
+    requestData.push(requestDataItem);
+
+    // Clear the form for the next entry
+    document.getElementById('classSelect').value = 'classA';
+    document.getElementById('genreSelect').value = 'dance'; // Set default genre to 'Dance'
+    document.getElementById('nameInput').value = '';
+    document.getElementById('movieNameInput').value = '';
+    document.getElementById('songList').innerHTML = '';
+
+    // Display the collected data (for demonstration purposes)
+    displayCollectedData();
+
+    // Display the unique page link
+    document.getElementById('page-link').textContent = window.location.href;
+}
+
+function displayCollectedData() {
+    var displayArea = document.getElementById('collected-data');
+
+    // Clear previous content
+    displayArea.innerHTML = '';
+
+    // Display the collected data
+    for (var i = 0; i < requestData.length; i++) {
+        var dataItem = requestData[i];
+        var dataElement = document.createElement('div');
+        dataElement.innerHTML = `
+            <strong>Class:</strong> ${dataItem.class}<br>
+            <strong>Genre:</strong> ${dataItem.genre}<br>
+            <strong>Name:</strong> ${dataItem.name}<br>
+            <strong>Movie:</strong> ${dataItem.movie}<br>
+            <strong>Songs:</strong> ${dataItem.songs.join(', ')}<br><br>
+        `;
+        displayArea.appendChild(dataElement);
+    }
+}
+
+// Function to access collected data
+function accessCollectedData() {
+    // Access the collected data
+    console.log("Accessing Collected Data:");
+    for (var i = 0; i < requestData.length; i++) {
+        var dataItem = requestData[i];
+        console.log("Class:", dataItem.class);
+        console.log("Genre:", dataItem.genre);
+        console.log("Name:", dataItem.name);
+        console.log("Movie:", dataItem.movie);
+        console.log("Songs:", dataItem.songs);
+        console.log("----------------------");
+    }
+}
+
+// Attach event listener to the button after the document has loaded
+document.addEventListener('DOMContentLoaded', function () {
+    var accessDataButton = document.getElementById('access-data-button');
+    if (accessDataButton) {
+        accessDataButton.onclick = accessCollectedData;
+    }
+});
